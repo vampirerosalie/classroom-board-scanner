@@ -206,3 +206,5 @@ test('worker preserves request IDs and reports results and errors through its do
     else globalThis.self = previousSelf;
   }
 });
+
+test('size/aspect/density abstention uses neutral wording without changing the decision', async()=>{const width=80,height=80,data=new Uint8ClampedArray(width*height*4).fill(255);for(let y=10;y<60;y++)for(let x=30;x<33;x++){const i=(y*width+x)*4;data[i]=data[i+1]=data[i+2]=0;}const r=await recognize({width,height,data},{mode:'choice'});assert.equal(r.suggestion,null);assert.equal(r.needsReview,true);assert.match(r.note,/Could not confidently recognise this writing\. Please confirm the letter\./);assert.doesNotMatch(r.note,/does not look like/);});

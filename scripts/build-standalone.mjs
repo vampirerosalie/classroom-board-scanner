@@ -4,7 +4,7 @@ const strip=s=>s.replace(/^import .*?;\s*$/mg,'').replace(/\bexport\s+/g,'');
 const qr=read('vendor/jsQR.js');
 const scan=qr+'\n'+strip(read('src/geometry.js'))+'\n'+read('src/scan-worker.js').replace("importScripts('../vendor/jsQR.js');",'').replace("const geometry=import('./geometry.js');",'const geometry=Promise.resolve({StabilityGate,checkGeometry,warpAnswer,assessQuality});');
 const recognition=strip(read('src/recognition.js'))+'\n'+strip(read('src/recognition-worker.js'));
-let app=strip(read('src/state.js'))+'\n'+strip(read('src/storage.js'))+'\n'+strip(read('src/app.js'));
+let app=strip(read('src/state.js'))+'\n'+strip(read('src/storage.js'))+'\n'+strip(read('src/crop-export.js'))+'\n'+strip(read('src/app.js'));
 app=app.replace("new Worker(new URL('./scan-worker.js',import.meta.url))","new Worker(URL.createObjectURL(new Blob(["+JSON.stringify(scan)+"],{type:'text/javascript'})))");
 app=app.replace("new Worker(new URL('./recognition-worker.js',import.meta.url),{type:'module'})","new Worker(URL.createObjectURL(new Blob(["+JSON.stringify(recognition)+"],{type:'text/javascript'})))");
 const samples={};for(const id of ['S001-A','S002-B','S003-C','S004-D','S005-went'])samples[id]='data:image/png;base64,'+fs.readFileSync(new URL('../public/samples/synthetic-'+id+'.png',import.meta.url)).toString('base64');

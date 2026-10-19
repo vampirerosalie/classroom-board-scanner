@@ -207,7 +207,7 @@ function preprocess(image) {
   const aspect = boxWidth / boxHeight;
   const density = largest.pixels.length / (boxWidth * boxHeight);
   if (boxWidth < 4 || boxHeight < 8 || aspect < 0.22 || aspect > 1.6 || density > 0.82) {
-    return { reason: 'The crop does not look like one clear block-capital A, B, C or D. Please review it manually.' };
+    return { reason: 'Could not confidently recognise this writing. Please confirm the letter.' };
   }
   if (largest.pixels.length / mask.length > 0.7) return { reason: 'Too much of the crop is dark. Use a light background and include space around one letter.' };
   return { mask: normalizeMask(clean, width, largest), aspect, density };
