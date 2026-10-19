@@ -36,8 +36,8 @@ export function createScanView(env=globalThis){
    // The app's existing Stop handler must release tracks before leaving.
    if(!exitButton.hidden&&!exitButton.disabled)exitButton.click();
   }else if(event.key==='Tab'){
-   // Scanning has one action; the dashboard and review are outside this view.
-   event.preventDefault();focusExit();
+   // Keep focus on the explicit capture and exit actions, not the dashboard.
+   event.preventDefault();const actions=[...shell.querySelectorAll('button')].filter(b=>!b.hidden&&!b.disabled&&!b.closest('[hidden]'));const index=actions.indexOf(doc.activeElement),next=event.shiftKey?(index<=0?actions.length-1:index-1):(index+1)%actions.length;if(actions.length)actions[next].focus({preventScroll:true});else focusExit();
   }
  }
  function enter(){

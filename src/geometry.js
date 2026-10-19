@@ -54,8 +54,57 @@ export function assessQuality(image){
   return {ok:true,reason:'Ready',...stats};
 }
 export class StabilityGate{
-  constructor(){this.last=null;this.since=0;}
-  reset(){this.last=null;this.since=0;}
-  update(id,corners,time){const size=distance(corners[0],corners[1]);const stable=this.last&&this.last.id===id&&time-this.last.time<700&&corners.every((p,i)=>distance(p,this.last.corners[i])<size*.065);
-    if(!stable)this.since=time;this.last={id,corners,time};return stable&&time-this.since>=240;}
+  constructor(){this.reset();}
+  reset(){
+    this.last=null;this.since=0;this.history=[];this.strictSamples=0;
+    this.info={reason:'reset',samples:0,elapsedMs:0,strictElapsedMs:0,sampleGapMs:null,maxCornerShiftPx:null,allowedCornerShiftPx:null,maxCornerRadiusPx:null,maxAnswerRadiusPx:null,allowedCornerRadiusPx:null,acceptedBy:null};
+  }
+  update(id,corners,time,answer){
+    const valid=points=>Array.isArray(points)&&points.length===4&&points.every(p=>Number.isFinite(p?.x)&&Number.isFinite(p?.y));
+    if(!Number.isFinite(time)||!valid(corners)){
+      this.reset();this.info.reason=Number.isFinite(time)?'invalid-corners':'invalid-time';return false;
+    }
+    const size=distance(corners[0],corners[1]);
+    if(!(size>0)){this.reset();this.info.reason='invalid-corners';return false;}
+    const previous=this.last,gap=previous?time-previous.time:null;
+    const continuity=Boolean(previous&&previous.id===id&&gap>0&&gap<700);
+    const interrupted=previous?(previous.id!==id?'pupil-changed':gap<=0?'non-monotonic-time':gap>=700?'sample-gap':null):null;
+    const maxShift=previous?Math.max(...corners.map((p,i)=>distance(p,previous.corners[i]))):null;
+    const allowedShift=size*.065;
+    // Preserve the original pairwise gate and its 240 ms / 700 ms / 6.5% limits.
+    // Non-monotonic timestamps cannot provide evidence of elapsed steadiness.
+    const pairStable=continuity&&maxShift<allowedShift;
+    if(!pairStable)this.since=time;
+    this.strictSamples=pairStable?Math.min(3,this.strictSamples+1):1;
+    const strictElapsed=time-this.since,strict=pairStable&&strictElapsed>=240;
+    const copy=points=>points.map(p=>({x:p.x,y:p.y}));
+    this.last={id,corners:copy(corners),time};
+
+    // Optional bounded-noise fallback: three contiguous observations must fit
+    // a common per-corner centre, including the extrapolated answer region.
+    // QR-only callers keep legacy behavior. Missing answer geometry breaks the
+    // window. A small QR-corner error can otherwise move the far crop edge a lot.
+    if(!continuity||!valid(answer))this.history=[];
+    if(valid(answer)){
+      const qrSide=Math.min(...corners.map((p,i)=>distance(p,corners[(i+1)%4])));
+      this.history.push({time,corners:copy(corners),answer:copy(answer),qrSide});
+      if(this.history.length>3)this.history.shift();
+    }
+    const samples=this.history.length,elapsed=samples?time-this.history[0].time:strictElapsed;
+    const allowedRadius=samples?Math.min(...this.history.map(s=>s.qrSide))*.065:null;
+    const radius=key=>{
+      const mean=[0,1,2,3].map(i=>({x:this.history.reduce((n,s)=>n+s[key][i].x,0)/samples,y:this.history.reduce((n,s)=>n+s[key][i].y,0)/samples}));
+      return Math.max(...this.history.flatMap(s=>s[key].map((p,i)=>distance(p,mean[i]))));
+    };
+    const cornerRadius=samples?radius('corners'):null,answerRadius=samples?radius('answer'):null;
+    const bounded=samples===3&&elapsed>=240&&allowedRadius>0&&cornerRadius<allowedRadius&&answerRadius<allowedRadius;
+    const acceptedBy=strict?'strict':bounded?'bounded-noise':null;
+    const reason=acceptedBy||interrupted||(samples===3&&cornerRadius>=allowedRadius?'corner-unstable':samples===3&&answerRadius>=allowedRadius?'answer-unstable':previous&&!pairStable?'corner-shift':elapsed<240?'insufficient-duration':'awaiting-samples');
+    // Scalar diagnostics only. Never expose stored corner arrays or frame data.
+    this.info={reason,samples:samples||this.strictSamples,elapsedMs:elapsed,strictElapsedMs:strictElapsed,sampleGapMs:gap,maxCornerShiftPx:maxShift,allowedCornerShiftPx:allowedShift,maxCornerRadiusPx:cornerRadius,maxAnswerRadiusPx:answerRadius,allowedCornerRadiusPx:allowedRadius,acceptedBy};
+    // This is a stability decision only: the worker must still use the current
+    // frame's raw geometry and all existing quality checks, then teacher review.
+    // It does not recover gaps >=700 ms or establish real-phone reliability.
+    return Boolean(acceptedBy);
+  }
 }
