@@ -1,0 +1,21 @@
+{
+  "name": "classroom-board-scanner",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Local-only classroom board capture pilot with teacher-reviewed recognition",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.js",
+    "test:browser": "node tests/browser.mjs",
+    "templates": "node scripts/generate-templates.cjs",
+    "build:standalone": "node scripts/build-standalone.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.55.1",
+    "fake-indexeddb": "6.2.4",
+    "jsdom": "26.1.0",
+    "jsqr": "1.4.0",
+    "qrcode": "1.5.4"
+  }
+}

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Print classroom response boards</title>
+<style>
+:root { color-scheme: light; font-family: system-ui, sans-serif; color: #173247; background: #eef2f5; }
+body { margin: 0; } .toolbar { max-width: 1060px; margin: auto; padding: 28px 24px; }
+h1 { font-size: 27px; margin: 0 0 10px; } p { line-height: 1.6; max-width: 780px; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+button, select, a.button { font: inherit; padding: 11px 16px; border-radius: 8px; border: 1px solid #c0cbd3; background: white; color: #173247; }
+button { background: #173247; color: white; cursor: pointer; border-color: #173247; }
+a { color: #244f70; } a.button { text-decoration: none; } .hint { font-size: 14px; }
+.board { width: min(1060px, calc(100% - 32px)); margin: 0 auto 24px; background: white; box-shadow: 0 5px 25px #17324718; }
+.board img { display: block; width: 100%; height: auto; } .board[hidden] { display: none; }
+@page { size: A4 landscape; margin: 0; }
+@media print { :root, body { background: white; margin: 0; padding: 0; } .toolbar { display: none !important; }
+.board { width: 297mm; height: 210mm; padding: 0; margin: 0; box-shadow: none; break-after: page; page-break-after: always; overflow: hidden; }
+.board:last-of-type { break-after: auto; page-break-after: auto; } .board img { width: 297mm; height: 210mm; } }
+</style></head><body>
+<header class="toolbar"><h1>Print your classroom boards</h1>
+<p>Each board identifies one student with an ID-only QR. The large answer area stays blank for writing. Print on <strong>A4 landscape at 100% / actual size</strong>, with browser headers and footers off. Avoid “fit to page”.</p>
+<div class="actions"><label for="set">Board set </label><select id="set"><option value="5">S001–S005 · 5 students</option><option value="10" selected>S001–S010 · 10 students</option><option value="40">S001–S040 · 40 students</option><option value="1">S001 · test sheet</option></select><button id="print" type="button">Print selected boards</button><a class="button" href="boards-S001-S005.pdf" download>5-board PDF</a><a class="button" href="boards-S001-S010.pdf" download>10-board PDF</a><a class="button" href="boards-S001-S040.pdf" download>40-board PDF</a></div>
+<p class="hint">Check a printed sheet with a ruler: the black QR square must measure 42 × 42 mm. Use a matte sleeve or card for repeated use; avoid glare. Student names are never encoded. <a href="../../">Back to scanner</a></p>
+</header><main id="boards"><section class="board" data-number="1"><img src="S001.svg" alt="Blank response board S001" width="1188" height="840"></section>
+<section class="board" data-number="2"><img src="S002.svg" alt="Blank response board S002" width="1188" height="840"></section>
+<section class="board" data-number="3"><img src="S003.svg" alt="Blank response board S003" width="1188" height="840"></section>
+<section class="board" data-number="4"><img src="S004.svg" alt="Blank response board S004" width="1188" height="840"></section>
+<section class="board" data-number="5"><img src="S005.svg" alt="Blank response board S005" width="1188" height="840"></section>
+<section class="board" data-number="6"><img src="S006.svg" alt="Blank response board S006" width="1188" height="840"></section>
+<section class="board" data-number="7"><img src="S007.svg" alt="Blank response board S007" width="1188" height="840"></section>
+<section class="board" data-number="8"><img src="S008.svg" alt="Blank response board S008" width="1188" height="840"></section>
+<section class="board" data-number="9"><img src="S009.svg" alt="Blank response board S009" width="1188" height="840"></section>
+<section class="board" data-number="10"><img src="S010.svg" alt="Blank response board S010" width="1188" height="840"></section>
+<section class="board" data-number="11" hidden><img src="S011.svg" alt="Blank response board S011" width="1188" height="840"></section>
+<section class="board" data-number="12" hidden><img src="S012.svg" alt="Blank response board S012" width="1188" height="840"></section>
+<section class="board" data-number="13" hidden><img src="S013.svg" alt="Blank response board S013" width="1188" height="840"></section>
+<section class="board" data-number="14" hidden><img src="S014.svg" alt="Blank response board S014" width="1188" height="840"></section>
+<section class="board" data-number="15" hidden><img src="S015.svg" alt="Blank response board S015" width="1188" height="840"></section>
+<section class="board" data-number="16" hidden><img src="S016.svg" alt="Blank response board S016" width="1188" height="840"></section>
+<section class="board" data-number="17" hidden><img src="S017.svg" alt="Blank response board S017" width="1188" height="840"></section>
+<section class="board" data-number="18" hidden><img src="S018.svg" alt="Blank response board S018" width="1188" height="840"></section>
+<section class="board" data-number="19" hidden><img src="S019.svg" alt="Blank response board S019" width="1188" height="840"></section>
+<section class="board" data-number="20" hidden><img src="S020.svg" alt="Blank response board S020" width="1188" height="840"></section>
+<section class="board" data-number="21" hidden><img src="S021.svg" alt="Blank response board S021" width="1188" height="840"></section>
+<section class="board" data-number="22" hidden><img src="S022.svg" alt="Blank response board S022" width="1188" height="840"></section>
+<section class="board" data-number="23" hidden><img src="S023.svg" alt="Blank response board S023" width="1188" height="840"></section>
+<section class="board" data-number="24" hidden><img src="S024.svg" alt="Blank response board S024" width="1188" height="840"></section>
+<section class="board" data-number="25" hidden><img src="S025.svg" alt="Blank response board S025" width="1188" height="840"></section>
+<section class="board" data-number="26" hidden><img src="S026.svg" alt="Blank response board S026" width="1188" height="840"></section>
+<section class="board" data-number="27" hidden><img src="S027.svg" alt="Blank response board S027" width="1188" height="840"></section>
+<section class="board" data-number="28" hidden><img src="S028.svg" alt="Blank response board S028" width="1188" height="840"></section>
+<section class="board" data-number="29" hidden><img src="S029.svg" alt="Blank response board S029" width="1188" height="840"></section>
+<section class="board" data-number="30" hidden><img src="S030.svg" alt="Blank response board S030" width="1188" height="840"></section>
+<section class="board" data-number="31" hidden><img src="S031.svg" alt="Blank response board S031" width="1188" height="840"></section>
+<section class="board" data-number="32" hidden><img src="S032.svg" alt="Blank response board S032" width="1188" height="840"></section>
+<section class="board" data-number="33" hidden><img src="S033.svg" alt="Blank response board S033" width="1188" height="840"></section>
+<section class="board" data-number="34" hidden><img src="S034.svg" alt="Blank response board S034" width="1188" height="840"></section>
+<section class="board" data-number="35" hidden><img src="S035.svg" alt="Blank response board S035" width="1188" height="840"></section>
+<section class="board" data-number="36" hidden><img src="S036.svg" alt="Blank response board S036" width="1188" height="840"></section>
+<section class="board" data-number="37" hidden><img src="S037.svg" alt="Blank response board S037" width="1188" height="840"></section>
+<section class="board" data-number="38" hidden><img src="S038.svg" alt="Blank response board S038" width="1188" height="840"></section>
+<section class="board" data-number="39" hidden><img src="S039.svg" alt="Blank response board S039" width="1188" height="840"></section>
+<section class="board" data-number="40" hidden><img src="S040.svg" alt="Blank response board S040" width="1188" height="840"></section></main>
+<script>
+const select = document.querySelector('#set');
+select.addEventListener('change', () => { const count = Number(select.value); document.querySelectorAll('.board').forEach(board => { board.hidden = Number(board.dataset.number) > count; }); });
+document.querySelector('#print').addEventListener('click', () => window.print());
+</script></body></html>

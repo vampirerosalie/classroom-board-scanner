@@ -1,0 +1,85 @@
+{
+  "geometry": {
+    "page": {
+      "width": 297,
+      "height": 210,
+      "unit": "mm",
+      "orientation": "landscape"
+    },
+    "qr": {
+      "x": 20,
+      "y": 18,
+      "width": 42,
+      "height": 42,
+      "version": 1,
+      "modules": 21,
+      "moduleSize": 2,
+      "errorCorrection": "M",
+      "quietZone": 8
+    },
+    "answerBorder": {
+      "x": 20,
+      "y": 82,
+      "width": 257,
+      "height": 108
+    },
+    "answerCrop": {
+      "x": 26,
+      "y": 88,
+      "width": 245,
+      "height": 96
+    }
+  },
+  "fixtures": [
+    {
+      "filename": "synthetic-S001-A.png",
+      "studentId": "S001",
+      "answer": "A",
+      "kind": "synthetic-typeset",
+      "width": 1188,
+      "height": 840,
+      "pixelsPerMillimetre": 4,
+      "purpose": "Geometry and pipeline smoke test only; not handwriting-accuracy evidence."
+    },
+    {
+      "filename": "synthetic-S002-B.png",
+      "studentId": "S002",
+      "answer": "B",
+      "kind": "synthetic-typeset",
+      "width": 1188,
+      "height": 840,
+      "pixelsPerMillimetre": 4,
+      "purpose": "Geometry and pipeline smoke test only; not handwriting-accuracy evidence."
+    },
+    {
+      "filename": "synthetic-S003-C.png",
+      "studentId": "S003",
+      "answer": "C",
+      "kind": "synthetic-typeset",
+      "width": 1188,
+      "height": 840,
+      "pixelsPerMillimetre": 4,
+      "purpose": "Geometry and pipeline smoke test only; not handwriting-accuracy evidence."
+    },
+    {
+      "filename": "synthetic-S004-D.png",
+      "studentId": "S004",
+      "answer": "D",
+      "kind": "synthetic-typeset",
+      "width": 1188,
+      "height": 840,
+      "pixelsPerMillimetre": 4,
+      "purpose": "Geometry and pipeline smoke test only; not handwriting-accuracy evidence."
+    },
+    {
+      "filename": "synthetic-S005-went.png",
+      "studentId": "S005",
+      "answer": "went",
+      "kind": "synthetic-typeset",
+      "width": 1188,
+      "height": 840,
+      "pixelsPerMillimetre": 4,
+      "purpose": "Geometry and pipeline smoke test only; not handwriting-accuracy evidence."
+    }
+  ]
+}

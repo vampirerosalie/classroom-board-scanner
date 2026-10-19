@@ -1,0 +1,35 @@
+BOARDLIGHT v0.2 — DIAGNOSTIC CAPTURE PILOT
+
+HOSTED PILOT: https://vampirerosalie.github.io/classroom-board-scanner/
+Open this HTTPS address on your phone or computer. Use dummy IDs only.
+
+LOCAL ALTERNATIVE:
+1. Extract the whole ZIP.
+2. On a computer with Node.js 20+, open a terminal in the extracted folder.
+3. Run: node server.mjs
+4. Open: http://localhost:4173
+5. Click “Try a synthetic sample”, then “S001 · A”.
+6. Open “Teacher check”, read the crop and confirm the transcription.
+7. Print public/templates/boards-S001-S005.pdf at actual size, A4 landscape.
+
+No npm install is needed to run the app. Browser dependencies are included.
+
+START-HERE.html is an optional self-contained build. Local-file behavior is
+not browser-verified; if workers/storage are blocked, use the server above.
+
+On a PHONE, a trusted HTTPS address is needed for a live camera test.
+Use the hosted HTTPS address above. “localhost” on a phone means the phone itself.
+See docs/PHONE_TEST.md before testing. Do not bypass certificate warnings.
+
+USE DUMMY IDS AND TEST ANSWERS ONLY.
+The letter matcher is experimental. Every answer needs teacher confirmation.
+Words require manual transcription. There is no paid AI or cloud OCR.
+Only answer crops and records are saved in this browser. Export before clearing
+browser data. The code contains no answer-upload service or telemetry.
+
+Node software tests pass. A real browser, camera and phone have NOT yet been
+verified in this build environment. See README.md for full limitations.
+
+In Teacher check, Download original crop saves the exact answer image for
+inspection. Match diagnostics explains abstention and shows the normalized ink.
+The v0.2 update does not claim to solve handwriting recognition.
