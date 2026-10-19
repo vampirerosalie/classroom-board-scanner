@@ -1,6 +1,6 @@
 /* Local-only worker: jsQR reads pixels; no BarcodeDetector dependency. */
-importScripts('../vendor/jsQR.js');
-const geometry=import('./geometry.js');
+importScripts('../vendor/jsQR.js?v=0.2.1');
+const geometry=import('./geometry.js?v=0.2.1');
 let stability;
 self.onmessage=async ({data:m})=>{
   try{
