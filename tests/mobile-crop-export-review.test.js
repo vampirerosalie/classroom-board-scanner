@@ -37,7 +37,7 @@ async function boot() {
   w.URL.revokeObjectURL = url => revoked.push(url);
   w.HTMLAnchorElement.prototype.click = function () {downloads.push({anchor:this,href:this.href,name:this.download,attached:this.isConnected});};
   w.open = (...args) => {popups.push(args);return null;};
-  const code = ['state.js','storage.js','crop-export.js','app.js'].map(name => fs.readFileSync(new URL('../src/'+name,import.meta.url),'utf8').replace(/^import .*?;\s*$/mg,'').replace(/\bexport\s+/g,'').replaceAll('import.meta.url',"'http://localhost:4173/src/app.js'")).join('\n');
+  const code = ['state.js','storage.js','crop-export.js','scan-view.js','scan-channel.js','app.js'].map(name => fs.readFileSync(new URL('../src/'+name,import.meta.url),'utf8').replace(/^import .*?;\s*$/mg,'').replace(/\bexport\s+/g,'').replaceAll('import.meta.url',"'http://localhost:4173/src/app.js'")).join('\n');
   w.eval(code+'\nwindow.reviewTest={get state(){return state},get worker(){return recognitionWorker},current,captureRecord,addQuestion,render,showTab};');
   for(let count=0;count<100&&w.document.querySelector('#saveStatus').textContent!=='Saved on this device';count++) await delay();
   assert.equal(w.document.querySelector('#saveStatus').textContent,'Saved on this device');

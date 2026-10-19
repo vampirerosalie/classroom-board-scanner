@@ -4,3 +4,21 @@
 .match-diagnostics{margin-top:12px;background:#f4f6ed;border:1px solid #e0e7d6;border-radius:6px;padding:10px;color:#64765b;font-size:10px;line-height:1.65}.match-diagnostics summary{cursor:pointer;font-weight:650;color:#3b6245}.match-diagnostics p{margin:9px 0}.diagnostic-preview{display:flex;gap:14px;align-items:center}.diagnostic-preview canvas{width:80px;height:100px;flex-shrink:0;image-rendering:pixelated;background:white;border:1px solid #d6dfce}.crop-download{font-size:11px;padding:11px 0 0}
 
 .crop-viewer{background:#fff;border:2px solid #8da782;border-radius:10px;padding:20px;margin:0 0 24px;scroll-margin-top:16px}.crop-viewer h2{font-size:20px;margin:0}.crop-viewer .section-heading{flex-wrap:wrap;align-items:center}.crop-original-scroll{overflow:auto;max-height:65vh;margin:18px 0;border:1px solid #dce4da;background:white}.crop-original-scroll img{display:block;max-width:100%;height:auto;-webkit-touch-callout:default;user-select:auto}.crop-original-scroll img.actual-pixels{max-width:none}.crop-export-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.crop-viewer .source-label{overflow-wrap:anywhere}.crop-viewer .field-help{font-size:12px;color:#49644b}
+
+/* The live scan surface fills the visible phone viewport. No media is moved,
+   cropped, stretched or mirrored: the video and overlay share the same box. */
+.scan-capture-count{display:none}
+html.scan-view-active,html.scan-view-active body{overflow:hidden;overscroll-behavior:none}
+.scan-view-active [data-scan-view-suppressed]{visibility:hidden!important;pointer-events:none!important}
+.scan-view-active #cameraShell{position:fixed;inset:0;top:var(--scan-view-top,0px);left:var(--scan-view-left,0px);right:auto;bottom:auto;width:var(--scan-view-width,100vw);height:var(--scan-view-height,100vh);min-width:0;min-height:0;max-width:none;max-height:none;aspect-ratio:auto;border:0;border-radius:0;background:#08110f;z-index:1000;isolation:isolate}
+@supports(height:100dvh){.scan-view-active #cameraShell{height:var(--scan-view-height,100dvh)}}
+.scan-view-active #cameraShell video,.scan-view-active #cameraShell canvas{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;border:0;border-radius:0;padding:0;margin:0}
+.scan-view-active .camera-top{top:0;left:0;right:0;padding:12px 14px;padding-top:max(12px,env(safe-area-inset-top));padding-left:max(14px,env(safe-area-inset-left));padding-right:max(14px,env(safe-area-inset-right));gap:12px;letter-spacing:0;background:linear-gradient(#08110fc9,transparent);align-items:center}
+.scan-view-active #cameraLabel{display:none}
+.scan-view-active .scan-capture-count{display:inline-flex;align-items:center;min-height:32px;padding:7px 10px;border-radius:20px;background:#10231fbf;color:#edf5e9;font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.scan-view-active .camera-stop{min-height:44px;min-width:108px;padding:11px 14px;border-color:#a6bcac;background:#10231fe6;color:#fff;font-size:13px;font-weight:650;border-radius:8px}
+.scan-view-active .camera-stop:focus-visible{outline:3px solid #e7bd68;outline-offset:3px}
+.scan-view-active .camera-feedback{bottom:0;min-height:54px;padding:15px 18px;padding-right:max(18px,env(safe-area-inset-right));padding-bottom:max(15px,env(safe-area-inset-bottom));padding-left:max(18px,env(safe-area-inset-left));font-size:12px;line-height:1.5;background:#10231fe6;color:#e2eddf;overflow-wrap:anywhere}
+.scan-view-active .camera-shell.captured{box-shadow:inset 0 0 0 3px #86ad5f}
+.scan-view-active .camera-shell.captured .camera-feedback{background:#32683a;color:#fff}
+@media(max-height:440px){.scan-view-active .camera-top{padding-top:max(8px,env(safe-area-inset-top));padding-bottom:8px}.scan-view-active .camera-feedback{min-height:42px;padding-top:9px;padding-bottom:max(9px,env(safe-area-inset-bottom));font-size:11px}}

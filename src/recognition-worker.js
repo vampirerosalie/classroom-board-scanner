@@ -1,4 +1,4 @@
-import { recognize } from './recognition.js?v=0.2.1';
+import { recognize } from './recognition.js?v=0.2.2';
 
 // A module worker keeps the experimental local matcher off the UI thread.
 // It never approves an answer, assigns a grade, persists a photo, or sends it.
